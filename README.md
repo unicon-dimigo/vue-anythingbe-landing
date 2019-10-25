@@ -1,6 +1,6 @@
-# anythingbe-landing
+# anythin
 
-> Landing page for anything be
+> A Vue.js project
 
 ## Build Setup
 
