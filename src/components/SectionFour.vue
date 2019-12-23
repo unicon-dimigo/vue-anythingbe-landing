@@ -69,7 +69,7 @@ export default {
 
   &__contact {
     position: absolute;
-    bottom: 100px;
+    bottom: 150px;
     font-family: 'NanumSquare';
     font-size: 1.1rem;
   }

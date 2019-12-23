@@ -11,6 +11,8 @@ import FinishImage from './assets/Finish.png'
 import Current from './assets/ScrollCurrent.png'
 import NotCurrent from './assets/Scroll.png'
 
+import fullpage from 'vue-fullpage.js'
+
 export default {
   name: 'App',
   components: {
@@ -32,7 +34,10 @@ export default {
         email: '',
         check: [ false, false ]
       },
-      subscribed: false
+      subscribed: false,
+      innerHeight: window.innerHeight,
+      currentIdx: 0,
+      numbers: [1, 2, 3, 4]
     }
   },
   methods: {
@@ -41,8 +46,20 @@ export default {
       this.subscribed = true
     }
   },
-  created() {
-    alert(this.$refs.fullpage);
+  mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    })
+
+    setInterval(() => {
+      const current = this.$refs.fullpage.api.getActiveSection().index
+      this.currentIdx = current
+    }, 100);
+  },
+  methods: {
+    onResize () {
+      this.innerHeight = window.innerHeight
+    }
   }
 }
 </script>
@@ -88,11 +105,27 @@ export default {
     <section-three class="s" />
     <section-four class="s" />
   </full-page>
-  <div class="scroll">
-    <img class="scroll__image" :src="Current">
-    <img class="scroll__image" :src="NotCurrent">
-    <img class="scroll__image" :src="NotCurrent">
-    <img class="scroll__image" :src="NotCurrent">
+  <div
+    v-show="currentIdx"
+    class="scroll"
+  >
+    <img
+      :key="`b-${i}`"
+      v-for="i in numbers[currentIdx - 2]"
+      class="scroll__image"
+      :src="NotCurrent"
+    >
+    <img
+      v-show="currentIdx"
+      class="scroll__image"
+      :src="Current"
+    >
+    <img
+      :key="`a-${i}`"
+      v-for="i in numbers[3 - currentIdx]"
+      class="scroll__image"
+      :src="NotCurrent"
+    >
   </div>
 </div>
 </template>
