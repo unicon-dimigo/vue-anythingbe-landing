@@ -1,12 +1,10 @@
 <script>
-import Image from '../assets/IllustFourth.png'
-import Current from '../assets/ScrollCurrent.png'
-import NoCurrent from '../assets/Scroll.png'
+import Image from '../assets/movie1.mp4'
 
 export default {
   name: 'SectionFour',
   data () {
-    return { Image, Current, NoCurrent }
+    return { Image }
   },
   methods: {
     show () {
@@ -28,13 +26,9 @@ export default {
     더 큰 세상(MCN)으로 나아가기 위해!
   </span>
   <button class="section__button" @click="show">소식 받아 보기</button>
-  <img :src="Image" class="section__image" />
-  <div class="section__scroll">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="Current">
-  </div>
+  <video class="section__image" autoplay loop muted>
+    <source :src="Image" type="video/mp4">
+  </video>
 
   <div class="section__contact">
     <span class="section__block">Anythingbe</span>
@@ -47,11 +41,13 @@ export default {
 <style lang="scss" scoped>
 .section {
   position: relative;
+  padding-top: 50px;
+
   &__title {
     font-family: 'BMDOHYEON';
     color: #1D545B;
     word-break: break-all;
-    font-size: 4rem;
+    font-size: 2.8rem;
     display: block;
     margin-top: 50px;
     margin-bottom: 40px;
@@ -63,26 +59,17 @@ export default {
   }
 
   &__image {
-    height: 40rem;
+    height: 38rem;
     float: right;
     position: absolute;
     bottom: 100px;
     right: 0;
     margin-right: -100px;
   }
-  &__scroll {
-    position: absolute;
-    bottom: 100px;
-    left: 50px;
 
-    &__icon {
-      width: 2rem;
-      height: auto;
-    }
-  }
   &__contact {
     position: absolute;
-    bottom: 200px;
+    bottom: 100px;
     font-family: 'NanumSquare';
     font-size: 1.1rem;
   }

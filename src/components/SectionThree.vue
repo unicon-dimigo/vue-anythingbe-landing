@@ -1,12 +1,10 @@
 <script>
-import Image from '../assets/IllustThird.png'
-import Current from '../assets/ScrollCurrent.png'
-import NoCurrent from '../assets/Scroll.png'
+import Image from '../assets/movie4.mp4'
 
 export default {
   name: 'SectionThree',
   data () {
-    return { Image, Current, NoCurrent }
+    return { Image }
   }
 }
 </script>
@@ -21,24 +19,22 @@ export default {
     여러 크리에이터들과의 협업<br><br>
     현역 크리에이터 강사진
   </span>
-  <img :src="Image" class="section__image" />
-  <div class="section__scroll">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="Current">
-    <img class="section__scroll__icon" :src="NoCurrent">
-  </div>
+  <video class="section__image" autoplay loop muted>
+    <source :src="Image" type="video/mp4">
+  </video>
 </div>
 </template>
 
 <style lang="scss" scoped>
 .section {
   position: relative;
+  padding-top: 50px;
+
   &__title {
     font-family: 'BMDOHYEON';
     color: #1D545B;
     word-break: break-all;
-    font-size: 4rem;
+    font-size: 2.8rem;
     display: block;
     margin-top: 50px;
     margin-bottom: 40px;
@@ -50,22 +46,11 @@ export default {
   }
 
   &__image {
-    height: 40rem;
+    height: 38rem;
     float: right;
     position: absolute;
     bottom: 100px;
     right: 0;
-    margin-right: -150px;
-  }
-  &__scroll {
-    position: absolute;
-    bottom: 100px;
-    left: 50px;
-
-    &__icon {
-      width: 2rem;
-      height: auto;
-    }
   }
 }
 </style>

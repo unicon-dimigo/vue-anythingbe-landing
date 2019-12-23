@@ -1,10 +1,15 @@
 <script>
+import Cover from './components/Cover.vue'
 import SectionOne from './components/SectionOne.vue'
 import SectionTwo from './components/SectionTwo.vue'
 import SectionThree from './components/SectionThree.vue'
 import SectionFour from './components/SectionFour.vue'
 
 import Background from './assets/Modal.png'
+import FinishImage from './assets/Finish.png'
+
+import Current from './assets/ScrollCurrent.png'
+import NotCurrent from './assets/Scroll.png'
 
 export default {
   name: 'App',
@@ -13,15 +18,31 @@ export default {
     SectionTwo,
     SectionThree,
     SectionFour,
-    Background
+    Background,
+    Current,
+    NotCurrent,
+    Cover
   },
   data () {
     return {
+      FinishImage,
+      Current,
+      NotCurrent,
       form: {
         email: '',
         check: [ false, false ]
-      }
+      },
+      subscribed: false
     }
+  },
+  methods: {
+    subscribe () {
+      // axios request to server
+      this.subscribed = true
+    }
+  },
+  created() {
+    alert(this.$refs.fullpage);
   }
 }
 </script>
@@ -29,7 +50,10 @@ export default {
 <template>
 <div>
   <modal name="contact">
-    <div class="modal__container">
+    <div
+      v-if="!subscribed"
+      class="modal__container"
+    >
       <h1 class="modal__title">AnythingBe</h1>
       <h2 class="modal__desc">최신 소식을 이메일로 만나 보세요!</h2>
       <div class="modal__input__wrapper">
@@ -40,17 +64,36 @@ export default {
           v-model="form.email"
         >
       </div>
-      <button class="modal__button">
+      <button
+        @click="subscribe"
+        class="modal__button"
+      >
         구독하기
       </button>
     </div>
+
+    <div
+      v-else
+      class="modal__container"
+    >
+      <h1 class="modal__title">감사합니다!</h1>
+      <h2 class="modal__desc">구독이 완료되셨습니다!</h2>
+      <img class="modal__image" :src="FinishImage">
+    </div>
   </modal>
   <full-page ref="fullpage" :options="options" id="fullpage">
+    <cover class="s" />
     <section-one class="s" />
     <section-two class="s" />
     <section-three class="s" />
     <section-four class="s" />
   </full-page>
+  <div class="scroll">
+    <img class="scroll__image" :src="Current">
+    <img class="scroll__image" :src="NotCurrent">
+    <img class="scroll__image" :src="NotCurrent">
+    <img class="scroll__image" :src="NotCurrent">
+  </div>
 </div>
 </template>
 
@@ -65,8 +108,24 @@ export default {
   font-style: normal;
 }
 
+.scroll {
+  position: fixed;
+  left: 30px;
+
+  &__image {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 .s {
   padding-left: 50px;
+}
+
+.scroll {
+  display: fixed;
+  bottom: 0;
+  margin-bottom: 20px;
 }
 
 .modal {
@@ -105,7 +164,8 @@ export default {
     font-family: 'BMDOHYEON';
 
     &::placeholder {
-      font-size: 1.1rem;
+      line-height: 2.3;
+      font-size: 0.8rem;
       font-family: 'BMDOHYEON';
     }
 
@@ -124,6 +184,10 @@ export default {
     width: 120px;
     outline: none;
     cursor: pointer;
+  }
+  &__image {
+    height: 5rem;
+    width: auto;
   }
 }
 </style>

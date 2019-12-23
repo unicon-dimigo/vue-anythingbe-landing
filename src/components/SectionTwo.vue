@@ -1,12 +1,10 @@
 <script>
-import Image from '../assets/IllustFirst.png'
-import Current from '../assets/ScrollCurrent.png'
-import NoCurrent from '../assets/Scroll.png'
+import Image from '../assets/movie3.mp4'
 
 export default {
   name: 'SectionTwo',
   data () {
-    return { Image, Current, NoCurrent }
+    return { Image }
   }
 }
 </script>
@@ -21,24 +19,22 @@ export default {
     소규모 크리에이터의 수익 창출<br><br>
     파트너쉽을 통한 폭 넓은 지원
   </span>
-  <img :src="Image" class="section__image" />
-  <div class="section__scroll">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="Current">
-    <img class="section__scroll__icon" :src="NoCurrent">
-    <img class="section__scroll__icon" :src="NoCurrent">
-  </div>
+  <video class="section__image" autoplay loop muted>
+    <source :src="Image" type="video/mp4">
+  </video>
 </div>
 </template>
 
 <style lang="scss" scoped>
 .section {
   position: relative;
+  padding-top: 50px;
+
   &__title {
     font-family: 'BMDOHYEON';
     color: #1D545B;
     word-break: break-all;
-    font-size: 4rem;
+    font-size: 2.8rem;
     display: block;
     margin-top: 50px;
     margin-bottom: 40px;
@@ -50,12 +46,10 @@ export default {
   }
 
   &__image {
-    height: 40rem;
-    float: right;
+    height: 35rem;
     position: absolute;
     bottom: 100px;
-    margin-right: -150px;
-    right: 0;
+    right: 20px;
   }
   &__scroll {
     position: absolute;
